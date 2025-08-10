@@ -1,0 +1,26 @@
+// Automatic Plant Watering System using Soil Moisture Sensor
+
+const int sensorPin = A0;
+const int pumpPin = 8;
+
+void setup() {
+  pinMode(pumpPin, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Plant Watering System Initialized");
+}
+
+void loop() {
+  int moisture = analogRead(sensorPin);
+  Serial.print("Soil Moisture: ");
+  Serial.println(moisture);
+
+  if (moisture < 500) { // Adjust threshold as needed
+    digitalWrite(pumpPin, HIGH);
+    Serial.println("💧 Soil is dry - Pump ON");
+  } else {
+    digitalWrite(pumpPin, LOW);
+    Serial.println("✅ Soil is wet - Pump OFF");
+  }
+
+  delay(2000);
+}
